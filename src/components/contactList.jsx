@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/addContacts/addContacts';
 import React from 'react';
 import css from '../List_css/List.module.css';
-import { useEffect } from 'react';
-import { fetchTasks } from '../redux/operations';
+
 const List = () => {
   //const Dispatch = useDispatch();
 
@@ -42,3 +41,6 @@ const List = () => {
 };
 
 export default List;
+
+
+
