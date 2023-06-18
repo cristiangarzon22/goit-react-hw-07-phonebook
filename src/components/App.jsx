@@ -1,16 +1,18 @@
-export const App = () => {
+import React from 'react';
+import Bar from './addBar';
+import List from './contactList';
+import ErrorBoundary from 'ErrorBoundary';
+const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <>
+      <ErrorBoundary>
+        <Bar />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <List />
+      </ErrorBoundary>
+    </>
   );
 };
+
+export default App;
