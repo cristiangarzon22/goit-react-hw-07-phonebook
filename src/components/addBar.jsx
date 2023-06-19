@@ -8,24 +8,25 @@ import { nanoid } from 'nanoid';
 
 const Bar = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts.contacts.items);
-
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const contactsString = useSelector((state) => JSON.stringify(state.contacts.items));
+  const contacts = JSON.parse(contactsString);
+  const [text, setText] = useState('');
+  const [completed, setCompleted] = useState('');
 
   const handleNameChange = (e) => {
-    setName(e.target.value);
+    setText(e.target.value);
   };
 
   const handleNumberChange = (e) => {
-    setNumber(e.target.value);
+    setCompleted(e.target.value);
   };
 
   const newContactAudit = (newContact) => {
     return contacts.filter(
-      (contact) => contact.name.toLowerCase() === newContact.name.toLowerCase()
+      (contact) => contact.text && newContact.text && contact.text.toLowerCase() === newContact.text.toLowerCase()
     );
   };
+  
 
   const contactFormSubmitHandler = (newContact) => {
     if (newContactAudit(newContact).length > 0) {
@@ -37,7 +38,6 @@ const Bar = () => {
       return false;
     } else {
       dispatch(addTask(newContact));
-      console.log(newContact);
       return true;
     }
   };
@@ -47,13 +47,13 @@ const Bar = () => {
 
     const newContact = {
       id: nanoid(),
-      name,
-      number,
+      text,
+      completed,
     };
 
     if (contactFormSubmitHandler(newContact)) {
-      setName('');
-      setNumber('');
+      setText('');
+      setCompleted('');
     }
   };
 
@@ -65,7 +65,7 @@ const Bar = () => {
           className={css.int}
           type="text"
           placeholder="Name"
-          value={name}
+          value={text}
           onChange={handleNameChange}
           autoComplete="on"
         />
@@ -73,7 +73,7 @@ const Bar = () => {
           className={css.int}
           type="text"
           placeholder="Number"
-          value={number}
+          value={completed}
           onChange={handleNumberChange}
           autoComplete="on"
         />

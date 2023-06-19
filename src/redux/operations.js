@@ -1,42 +1,40 @@
-
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-const BASE_URL = "https://648e68f72de8d0ea11e8b157.mockapi.io";
+import axios from "axios";
+//const BASE_URL = "https://648e68f72de8d0ea11e8b157.mockapi.io";
+axios.defaults.baseURL = "https://62584f320c918296a49543e7.mockapi.io";
 
 export const fetchTasks = createAsyncThunk(
   "tasks/fetchAll",
   async (_, thunkAPI) => {
     try {
-      const data = await fetch(`${BASE_URL}/contacts`);
-      const response = await data.json();
-      return response;
-      
+      const response = await axios.get("/tasks");
+      return response.data;
     } catch (e) {
-      thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
 
 export const addTask = createAsyncThunk(
-    "tasks/addTask",
-    async (text, thunkAPI) => {
-      try {
-        const data = await fetch(`${BASE_URL}/contacts`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(
-            text
-          ),
-          
-        });
-        const response = await data.json();
-        return response;
-      } catch (e) {
-        thunkAPI.rejectWithValue(e.message);
-      }
+  "tasks/add",
+  async (taskData, thunkAPI) => {
+    try {
+      const response = await axios.post("/tasks", taskData);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
-  );
-  
+  }
+);
+
+export const deleteTask = createAsyncThunk(
+  "tasks/delete",
+  async (taskId, thunkAPI) => {
+    try {
+      await axios.delete(`/tasks/${taskId}`);
+      return taskId;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);

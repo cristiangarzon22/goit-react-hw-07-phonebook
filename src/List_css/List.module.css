@@ -7,9 +7,10 @@ body {
   margin-left: 39%;
   background-color: rgb(46, 247, 39);
   width: 20%;
-  height: auto;
+  height: 200px;
   font-size: 20px;
   border-radius: 10px;
+  overflow: auto;
 }
 
 .button {
