@@ -1,15 +1,17 @@
 .form {
   display: grid;
   grid-template-columns: 1fr;
-  background-color: rgb(14, 241, 222);
+  background-color: #1c1c1c9a;
   width: 25%;
   margin: 20px auto;
-  border-radius: 5px;
+  border-radius: 8px;
   height: auto;
 }
 
 .title {
-  margin: 10px auto;
+  margin: auto;
+  text-align: center;
+  color: #45f3ff;
 }
 
 .int {

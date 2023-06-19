@@ -79,7 +79,7 @@ const Bar = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className={css.form}>
+        <form onSubmit={handleSubmit} className={css.form}>
         <h3 className={css.title}>Add Contact</h3>
         <input
           className={css.int}
@@ -104,6 +104,7 @@ const Bar = () => {
         </button>
       </form>
       <Filter />
+
     </>
   );
 };
