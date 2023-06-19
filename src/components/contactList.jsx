@@ -28,7 +28,7 @@ const List = () => {
   }, [dispatch]);
 
   return (
-    <ul className={css.list}>
+    <ul className={css.list}>   
   {visibleContacts && visibleContacts.length > 0 ? (
     visibleContacts.map((e) => (
       <li className={css.item} key={e.id}>

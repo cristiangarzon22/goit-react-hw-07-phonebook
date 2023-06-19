@@ -12,13 +12,21 @@ const Bar = () => {
   const contacts = JSON.parse(contactsString);
   const [text, setText] = useState('');
   const [completed, setCompleted] = useState('');
+  const [showWarning, setShowWarning] = useState(false);
 
   const handleNameChange = (e) => {
     setText(e.target.value);
   };
 
   const handleNumberChange = (e) => {
-    setCompleted(e.target.value);
+    const inputValue = e.target.value;
+    if (/^\d*$/.test(inputValue)) {
+      setCompleted(inputValue);
+      setShowWarning(false);
+    } else {
+      setCompleted(inputValue);
+      setShowWarning(true);
+    }
   };
 
   const newContactAudit = (newContact) => {
@@ -36,8 +44,20 @@ const Bar = () => {
         'Aceptar',
         );
       return false;
-    } else {
+    } else if(newContact.text.trim() === '' || newContact.completed.trim() === ''){
+      Report.warning(
+        'Campos Vacios',
+        'POR FAVOR RELLENE TODOS LOS CAMPOS!!!',
+        'Aceptar',
+        );
+    }
+     else {
       dispatch(addTask(newContact));
+      Report.success(
+        'Usuario Almacenado',
+        'EL USUARIO HA SIDO AGREGADO CON EXITO!!!',
+        'Aceptar',
+        );
       return true;
     }
   };
@@ -76,7 +96,9 @@ const Bar = () => {
           value={completed}
           onChange={handleNumberChange}
           autoComplete="on"
+          pattern="\d*"
         />
+        {showWarning && <div className={css.warning}>Solo se permiten números</div>}
         <button className={css.btn} type="submit">
           Add Contact
         </button>

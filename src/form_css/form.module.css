@@ -40,3 +40,13 @@
 .int:focus {
   outline: 2px solid rgb(5, 184, 154);
 }
+
+.warning{
+  background-color: rgba(241, 35, 35, 0.699);
+  width: 200px;
+  text-align: center;
+  margin: auto;
+  border-radius: 5px;
+  color: white;
+  border: 2px solid red;
+}

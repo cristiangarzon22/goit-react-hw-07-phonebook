@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTasks } from "redux/operations";
 import Bar from "./addBar";
 import List from "./contactList";
+import { SPINNER } from "./spiner/spinner";
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -14,10 +15,10 @@ export const App = () => {
 
   return (
     <div>
-      {isLoading && <b>Loading tasks...</b>}
+      {isLoading && <SPINNER/>}
       {error && <b>{error}</b>}
       <Bar />
-      <List />
+      <List loading={isLoading}/>
     </div>
   );
 };
